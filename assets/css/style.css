@@ -1729,3 +1729,16 @@ textarea.form-control {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+
+.lang-switch {
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: 1px solid var(--border-color);
+    padding: 6px 14px !important;
+    border-radius: 20px;
+}
+.lang-switch:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}

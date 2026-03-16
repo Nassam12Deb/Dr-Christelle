@@ -1,14 +1,16 @@
 <?php include 'header.php';
 
-// Récupérer le profil
 $profile = $pdo->query("SELECT * FROM profile LIMIT 1")->fetch();
+
+$profileTitle        = ($lang === 'en' && !empty($profile['title_en']))        ? $profile['title_en']        : $profile['title'];
+$profileAvailability = ($lang === 'en' && !empty($profile['availability_en'])) ? $profile['availability_en'] : $profile['availability'];
+$profileBio          = ($lang === 'en' && !empty($profile['bio_en']))          ? $profile['bio_en']          : $profile['bio'];
 ?>
 
 <section class="section" style="margin-top: 100px;">
     <div class="container">
-        <h1 class="section-title" data-aos="fade-right">À propos</h1>
+        <h1 class="section-title" data-aos="fade-right"><?php echo $t['about_title']; ?></h1>
 
-        <!-- Profil - Version améliorée -->
         <div class="profile-modern" data-aos="fade-up">
             <div class="profile-card">
                 <div class="profile-avatar-wrapper">
@@ -22,7 +24,7 @@ $profile = $pdo->query("SELECT * FROM profile LIMIT 1")->fetch();
                 </div>
                 <div class="profile-info">
                     <h3 class="profile-name"><?php echo htmlspecialchars($profile['full_name']); ?></h3>
-                    <div class="profile-badge"><?php echo htmlspecialchars($profile['title']); ?></div>
+                    <div class="profile-badge"><?php echo htmlspecialchars($profileTitle); ?></div>
                     <div class="profile-location">
                         <i class="fas fa-map-marker-alt text-accent"></i>
                         <span><?php echo htmlspecialchars($profile['location']); ?></span>
@@ -34,66 +36,58 @@ $profile = $pdo->query("SELECT * FROM profile LIMIT 1")->fetch();
                 <div class="stat-item">
                     <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
                     <div class="stat-content">
-                        <strong>Diplôme</strong>
-                        <span>Doctorat en Cybersécurité</span>
+                        <strong><?php echo $t['about_degree']; ?></strong>
+                        <span><?php echo $t['about_degree_val']; ?></span>
                     </div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-icon"><i class="fas fa-university"></i></div>
                     <div class="stat-content">
-                        <strong>Université</strong>
+                        <strong><?php echo $t['about_university']; ?></strong>
                         <span><?php echo htmlspecialchars($profile['university']); ?></span>
                     </div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-icon"><i class="fas fa-clock"></i></div>
                     <div class="stat-content">
-                        <strong>Disponibilité</strong>
-                        <span><?php echo htmlspecialchars($profile['availability']); ?></span>
+                        <strong><?php echo $t['about_availability']; ?></strong>
+                        <span><?php echo htmlspecialchars($profileAvailability); ?></span>
                     </div>
                 </div>
             </div>
 
             <div class="profile-bio">
-                <?php echo nl2br(htmlspecialchars($profile['bio'])); ?>
+                <?php echo nl2br(htmlspecialchars($profileBio)); ?>
             </div>
         </div>
 
         <!-- Compétences -->
-        <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;">Compétences</h2>
+        <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;"><?php echo $t['about_skills']; ?></h2>
         <div class="skills-container">
             <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                <h4><i class="fas fa-bug"></i> Offensif</h4>
+                <h4><i class="fas fa-bug"></i> <?php echo $t['about_offensive']; ?></h4>
                 <div class="skill-item">
-                    <span class="skill-name">Tests d’intrusion</span>
-                    <div class="skill-bar">
-                        <div class="skill-level" data-width="90"></div>
-                    </div>
+                    <span class="skill-name">Tests d'intrusion</span>
+                    <div class="skill-bar"><div class="skill-level" data-width="90"></div></div>
                 </div>
                 <div class="skill-item">
                     <span class="skill-name">Reverse Engineering</span>
-                    <div class="skill-bar">
-                        <div class="skill-level" data-width="75"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-level" data-width="75"></div></div>
                 </div>
             </div>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                <h4><i class="fas fa-shield-alt"></i> Défensif</h4>
+                <h4><i class="fas fa-shield-alt"></i> <?php echo $t['about_defensive']; ?></h4>
                 <div class="skill-item">
                     <span class="skill-name">SOC / Threat Hunting</span>
-                    <div class="skill-bar">
-                        <div class="skill-level" data-width="88"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-level" data-width="88"></div></div>
                 </div>
                 <div class="skill-item">
                     <span class="skill-name">Forensic</span>
-                    <div class="skill-bar">
-                        <div class="skill-level" data-width="80"></div>
-                    </div>
+                    <div class="skill-bar"><div class="skill-level" data-width="80"></div></div>
                 </div>
             </div>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
-                <h4><i class="fas fa-code"></i> Outils & langages</h4>
+                <h4><i class="fas fa-code"></i> <?php echo $t['about_tools']; ?></h4>
                 <div class="tags-cloud">
                     <span class="tag">Python</span>
                     <span class="tag">Bash</span>
@@ -106,7 +100,7 @@ $profile = $pdo->query("SELECT * FROM profile LIMIT 1")->fetch();
         </div>
 
         <!-- Certifications -->
-        <h2 class="section-title" data-aos="fade-right">Certifications</h2>
+        <h2 class="section-title" data-aos="fade-right"><?php echo $t['about_certs']; ?></h2>
         <div class="tags-cloud" style="justify-content: center;" data-aos="fade-up">
             <span class="tag">CISSP</span>
             <span class="tag">OSCP</span>
@@ -119,81 +113,80 @@ $profile = $pdo->query("SELECT * FROM profile LIMIT 1")->fetch();
         </div>
 
         <!-- Recherche -->
-        <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;">Recherche</h2>
+        <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;"><?php echo $t['about_research']; ?></h2>
         <div class="card" style="margin-bottom: 30px;" data-aos="fade-up">
-            <h3 class="text-accent">Thèse de Doctorat</h3>
-            <p><strong>Sécurité adaptative des infrastructures cloud par apprentissage automatique</strong> (2019)</p>
-            <p>Détection d’intrusions en temps réel basée sur l’IA avec un taux de détection de 99,2%.</p>
+            <h3 class="text-accent"><?php echo $t['about_thesis']; ?></h3>
+            <p><strong><?php echo $t['about_thesis_title']; ?></strong> <?php echo $t['about_thesis_year']; ?></p>
+            <p><?php echo $t['about_thesis_desc']; ?></p>
         </div>
         <div class="skills-container">
             <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                <h4><i class="fas fa-robot"></i> AI Security</h4>
-                <p>Robustesse des modèles, adversarial attacks</p>
+                <h4><i class="fas fa-robot"></i> <?php echo $t['research_ai']; ?></h4>
+                <p><?php echo $t['research_ai_desc']; ?></p>
             </div>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                <h4><i class="fas fa-cloud"></i> Cloud Security</h4>
-                <p>Architectures Zero Trust, chiffrement homomorphe</p>
+                <h4><i class="fas fa-cloud"></i> <?php echo $t['research_cloud']; ?></h4>
+                <p><?php echo $t['research_cloud_desc']; ?></p>
             </div>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
-                <h4><i class="fas fa-shield-virus"></i> Threat Intelligence</h4>
-                <p>Analyse de malware, OSINT</p>
+                <h4><i class="fas fa-shield-virus"></i> <?php echo $t['research_threat']; ?></h4>
+                <p><?php echo $t['research_threat_desc']; ?></p>
             </div>
         </div>
 
         <!-- Enseignement -->
-        <h2 class="section-title" data-aos="fade-right">Enseignement</h2>
+        <h2 class="section-title" data-aos="fade-right"><?php echo $t['about_teaching']; ?></h2>
         <div class="skills-container">
             <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                <h4>Cybersécurité avancée</h4>
-                <p class="timeline-location">Master 2 · 30h</p>
-                <p>Cryptographie, tests d’intrusion, réponse à incident.</p>
+                <h4><?php echo $t['teach_1_title']; ?></h4>
+                <p class="timeline-location"><?php echo $t['teach_1_level']; ?></p>
+                <p><?php echo $t['teach_1_desc']; ?></p>
             </div>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                <h4>Sécurité des systèmes d’information</h4>
-                <p class="timeline-location">Licence 3 · 24h</p>
-                <p>Normes ISO 27001, gestion des risques, audits.</p>
+                <h4><?php echo $t['teach_2_title']; ?></h4>
+                <p class="timeline-location"><?php echo $t['teach_2_level']; ?></p>
+                <p><?php echo $t['teach_2_desc']; ?></p>
             </div>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
-                <h4>Machine Learning pour la cybersécurité</h4>
-                <p class="timeline-location">Master 1 · 20h</p>
-                <p>Détection d’anomalies, classification de malwares.</p>
+                <h4><?php echo $t['teach_3_title']; ?></h4>
+                <p class="timeline-location"><?php echo $t['teach_3_level']; ?></p>
+                <p><?php echo $t['teach_3_desc']; ?></p>
             </div>
         </div>
 
         <!-- Conférences -->
-        <h2 class="section-title" data-aos="fade-right">Conférences</h2>
+        <h2 class="section-title" data-aos="fade-right"><?php echo $t['about_conferences']; ?></h2>
         <div class="timeline">
             <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
                 <div class="timeline-date">2023</div>
                 <div class="timeline-content">
-                    <h5>Black Hat Europe</h5>
-                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> Londres, UK</div>
-                    <p>Workshop : « Practical Adversarial Attacks on IDS »</p>
+                    <h5><?php echo $t['conf_1_title']; ?></h5>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> <?php echo $t['conf_1_location']; ?></div>
+                    <p><?php echo $t['conf_1_desc']; ?></p>
                 </div>
             </div>
             <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
                 <div class="timeline-date">2022</div>
                 <div class="timeline-content">
-                    <h5>RSA Conference</h5>
-                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> San Francisco, USA</div>
-                    <p>Présentation : « AI for Threat Hunting »</p>
+                    <h5><?php echo $t['conf_2_title']; ?></h5>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> <?php echo $t['conf_2_location']; ?></div>
+                    <p><?php echo $t['conf_2_desc']; ?></p>
                 </div>
             </div>
             <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
                 <div class="timeline-date">2021</div>
                 <div class="timeline-content">
-                    <h5>Forum International de la Cybersécurité</h5>
-                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> Lille, France</div>
-                    <p>Table ronde : « Enjeux de la conformité RGPD/NIS2 »</p>
+                    <h5><?php echo $t['conf_3_title']; ?></h5>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> <?php echo $t['conf_3_location']; ?></div>
+                    <p><?php echo $t['conf_3_desc']; ?></p>
                 </div>
             </div>
         </div>
 
         <!-- Témoignage -->
         <div class="testimonial" data-aos="zoom-in">
-            <p>« Le cours de Dr. Dejolie m’a permis de comprendre concrètement comment analyser un malware et réagir en
-                équipe. Une approche terrain inestimable. »</p>
-            <p class="testimonial-author">— Ancien étudiant, analyste SOC</p>
+            <p><?php echo $t['about_testimonial']; ?></p>
+            <p class="testimonial-author"><?php echo $t['about_testimonial_author']; ?></p>
         </div>
     </div>
 </section>
