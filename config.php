@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Constantes du site
 define('SITE_NAME', 'Dr. Dejolie Christelle');
 define('SITE_TITLE', 'Docteur en Cybersécurité | Chercheur & Consultant');
 define('BASE_URL', 'http://localhost/Dr%20Christelle/');
@@ -21,13 +20,14 @@ try {
 }
 
 // ===== SYSTÈME DE LANGUE =====
-if (!isset($_SESSION['lang'])) {
-    $_SESSION['lang'] = 'fr';
-}
+// Priorité : 1) paramètre GET  2) session  3) défaut FR
 if (isset($_GET['lang']) && in_array($_GET['lang'], ['fr', 'en'])) {
     $_SESSION['lang'] = $_GET['lang'];
+    session_write_close();
+    session_start();
 }
-$lang = $_SESSION['lang'];
+
+$lang = $_SESSION['lang'] ?? 'fr';
 
 $langFile = __DIR__ . '/lang/' . $lang . '.php';
 if (file_exists($langFile)) {

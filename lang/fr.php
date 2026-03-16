@@ -120,4 +120,10 @@ return [
         'Cloud Security Architect',
         'Professor',
     ],
+
+    // Skills hardcoded
+    'skill_pentest'   => 'Tests d\'intrusion',
+    'skill_reverse'   => 'Reverse Engineering',
+    'skill_soc'       => 'SOC / Threat Hunting',
+    'skill_forensic'  => 'Forensic',
 ];

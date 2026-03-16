@@ -2,9 +2,9 @@
 
 $profile = $pdo->query("SELECT * FROM profile LIMIT 1")->fetch();
 
-$profileTitle        = ($lang === 'en' && !empty($profile['title_en']))        ? $profile['title_en']        : $profile['title'];
+$profileTitle = ($lang === 'en' && !empty($profile['title_en'])) ? $profile['title_en'] : $profile['title'];
 $profileAvailability = ($lang === 'en' && !empty($profile['availability_en'])) ? $profile['availability_en'] : $profile['availability'];
-$profileBio          = ($lang === 'en' && !empty($profile['bio_en']))          ? $profile['bio_en']          : $profile['bio'];
+$profileBio = ($lang === 'en' && !empty($profile['bio_en'])) ? $profile['bio_en'] : $profile['bio'];
 ?>
 
 <section class="section" style="margin-top: 100px;">
@@ -67,23 +67,31 @@ $profileBio          = ($lang === 'en' && !empty($profile['bio_en']))          ?
             <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
                 <h4><i class="fas fa-bug"></i> <?php echo $t['about_offensive']; ?></h4>
                 <div class="skill-item">
-                    <span class="skill-name">Tests d'intrusion</span>
-                    <div class="skill-bar"><div class="skill-level" data-width="90"></div></div>
+                    <span class="skill-name"><?php echo $t['skill_pentest']; ?></span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-width="90"></div>
+                    </div>
                 </div>
                 <div class="skill-item">
-                    <span class="skill-name">Reverse Engineering</span>
-                    <div class="skill-bar"><div class="skill-level" data-width="75"></div></div>
+                    <span class="skill-name"><?php echo $t['skill_reverse']; ?></span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-width="75"></div>
+                    </div>
                 </div>
             </div>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
                 <h4><i class="fas fa-shield-alt"></i> <?php echo $t['about_defensive']; ?></h4>
                 <div class="skill-item">
-                    <span class="skill-name">SOC / Threat Hunting</span>
-                    <div class="skill-bar"><div class="skill-level" data-width="88"></div></div>
+                    <span class="skill-name"><?php echo $t['skill_soc']; ?></span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-width="88"></div>
+                    </div>
                 </div>
                 <div class="skill-item">
-                    <span class="skill-name">Forensic</span>
-                    <div class="skill-bar"><div class="skill-level" data-width="80"></div></div>
+                    <span class="skill-name"><?php echo $t['skill_forensic']; ?></span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-width="80"></div>
+                    </div>
                 </div>
             </div>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
@@ -113,7 +121,8 @@ $profileBio          = ($lang === 'en' && !empty($profile['bio_en']))          ?
         </div>
 
         <!-- Recherche -->
-        <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;"><?php echo $t['about_research']; ?></h2>
+        <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;"><?php echo $t['about_research']; ?>
+        </h2>
         <div class="card" style="margin-bottom: 30px;" data-aos="fade-up">
             <h3 class="text-accent"><?php echo $t['about_thesis']; ?></h3>
             <p><strong><?php echo $t['about_thesis_title']; ?></strong> <?php echo $t['about_thesis_year']; ?></p>
@@ -161,7 +170,8 @@ $profileBio          = ($lang === 'en' && !empty($profile['bio_en']))          ?
                 <div class="timeline-date">2023</div>
                 <div class="timeline-content">
                     <h5><?php echo $t['conf_1_title']; ?></h5>
-                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> <?php echo $t['conf_1_location']; ?></div>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i>
+                        <?php echo $t['conf_1_location']; ?></div>
                     <p><?php echo $t['conf_1_desc']; ?></p>
                 </div>
             </div>
@@ -169,7 +179,8 @@ $profileBio          = ($lang === 'en' && !empty($profile['bio_en']))          ?
                 <div class="timeline-date">2022</div>
                 <div class="timeline-content">
                     <h5><?php echo $t['conf_2_title']; ?></h5>
-                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> <?php echo $t['conf_2_location']; ?></div>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i>
+                        <?php echo $t['conf_2_location']; ?></div>
                     <p><?php echo $t['conf_2_desc']; ?></p>
                 </div>
             </div>
@@ -177,7 +188,8 @@ $profileBio          = ($lang === 'en' && !empty($profile['bio_en']))          ?
                 <div class="timeline-date">2021</div>
                 <div class="timeline-content">
                     <h5><?php echo $t['conf_3_title']; ?></h5>
-                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i> <?php echo $t['conf_3_location']; ?></div>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i>
+                        <?php echo $t['conf_3_location']; ?></div>
                     <p><?php echo $t['conf_3_desc']; ?></p>
                 </div>
             </div>
