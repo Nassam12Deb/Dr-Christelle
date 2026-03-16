@@ -2,24 +2,15 @@
 
 $profile = $pdo->query("SELECT * FROM profile LIMIT 1")->fetch();
 
-$profileTitle        = ($lang === 'en' && !empty($profile['title_en']))        ? $profile['title_en']        : $profile['title'];
+$profileTitle = ($lang === 'en' && !empty($profile['title_en'])) ? $profile['title_en'] : $profile['title'];
 $profileAvailability = ($lang === 'en' && !empty($profile['availability_en'])) ? $profile['availability_en'] : $profile['availability'];
-$profileBio          = ($lang === 'en' && !empty($profile['bio_en']))          ? $profile['bio_en']          : $profile['bio'];
-
-// Récupérer les données dynamiques
-$skills_offensive = $pdo->query("SELECT * FROM skills WHERE category='offensive' ORDER BY sort_order")->fetchAll();
-$skills_defensive = $pdo->query("SELECT * FROM skills WHERE category='defensive' ORDER BY sort_order")->fetchAll();
-$skills_tools     = $pdo->query("SELECT * FROM skills WHERE category='tools' ORDER BY sort_order")->fetchAll();
-$certifications   = $pdo->query("SELECT * FROM certifications ORDER BY sort_order")->fetchAll();
-$teachings        = $pdo->query("SELECT * FROM teachings ORDER BY sort_order")->fetchAll();
-$conferences      = $pdo->query("SELECT * FROM conferences ORDER BY year DESC, sort_order")->fetchAll();
+$profileBio = ($lang === 'en' && !empty($profile['bio_en'])) ? $profile['bio_en'] : $profile['bio'];
 ?>
 
 <section class="section" style="margin-top: 100px;">
     <div class="container">
         <h1 class="section-title" data-aos="fade-right"><?php echo $t['about_title']; ?></h1>
 
-        <!-- Profil -->
         <div class="profile-modern" data-aos="fade-up">
             <div class="profile-card">
                 <div class="profile-avatar-wrapper">
@@ -73,69 +64,65 @@ $conferences      = $pdo->query("SELECT * FROM conferences ORDER BY year DESC, s
         <!-- Compétences -->
         <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;"><?php echo $t['about_skills']; ?></h2>
         <div class="skills-container">
-
-            <!-- Offensif -->
-            <?php if (!empty($skills_offensive)): ?>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
                 <h4><i class="fas fa-bug"></i> <?php echo $t['about_offensive']; ?></h4>
-                <?php foreach ($skills_offensive as $skill):
-                    $skillName = ($lang === 'en' && !empty($skill['name_en'])) ? $skill['name_en'] : $skill['name'];
-                ?>
                 <div class="skill-item">
-                    <span class="skill-name"><?php echo htmlspecialchars($skillName); ?></span>
+                    <span class="skill-name"><?php echo $t['skill_pentest']; ?></span>
                     <div class="skill-bar">
-                        <div class="skill-level" data-width="<?php echo $skill['level']; ?>"></div>
+                        <div class="skill-level" data-width="90"></div>
                     </div>
                 </div>
-                <?php endforeach; ?>
+                <div class="skill-item">
+                    <span class="skill-name"><?php echo $t['skill_reverse']; ?></span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-width="75"></div>
+                    </div>
+                </div>
             </div>
-            <?php endif; ?>
-
-            <!-- Défensif -->
-            <?php if (!empty($skills_defensive)): ?>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
                 <h4><i class="fas fa-shield-alt"></i> <?php echo $t['about_defensive']; ?></h4>
-                <?php foreach ($skills_defensive as $skill):
-                    $skillName = ($lang === 'en' && !empty($skill['name_en'])) ? $skill['name_en'] : $skill['name'];
-                ?>
                 <div class="skill-item">
-                    <span class="skill-name"><?php echo htmlspecialchars($skillName); ?></span>
+                    <span class="skill-name"><?php echo $t['skill_soc']; ?></span>
                     <div class="skill-bar">
-                        <div class="skill-level" data-width="<?php echo $skill['level']; ?>"></div>
+                        <div class="skill-level" data-width="88"></div>
                     </div>
                 </div>
-                <?php endforeach; ?>
+                <div class="skill-item">
+                    <span class="skill-name"><?php echo $t['skill_forensic']; ?></span>
+                    <div class="skill-bar">
+                        <div class="skill-level" data-width="80"></div>
+                    </div>
+                </div>
             </div>
-            <?php endif; ?>
-
-            <!-- Outils -->
-            <?php if (!empty($skills_tools)): ?>
             <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
                 <h4><i class="fas fa-code"></i> <?php echo $t['about_tools']; ?></h4>
                 <div class="tags-cloud">
-                    <?php foreach ($skills_tools as $skill):
-                        $skillName = ($lang === 'en' && !empty($skill['name_en'])) ? $skill['name_en'] : $skill['name'];
-                    ?>
-                    <span class="tag"><?php echo htmlspecialchars($skillName); ?></span>
-                    <?php endforeach; ?>
+                    <span class="tag">Python</span>
+                    <span class="tag">Bash</span>
+                    <span class="tag">Linux</span>
+                    <span class="tag">AWS/Azure</span>
+                    <span class="tag">TensorFlow</span>
+                    <span class="tag">Wireshark</span>
                 </div>
             </div>
-            <?php endif; ?>
-
         </div>
 
         <!-- Certifications -->
-        <?php if (!empty($certifications)): ?>
         <h2 class="section-title" data-aos="fade-right"><?php echo $t['about_certs']; ?></h2>
         <div class="tags-cloud" style="justify-content: center;" data-aos="fade-up">
-            <?php foreach ($certifications as $cert): ?>
-            <span class="tag"><?php echo htmlspecialchars($cert['name']); ?></span>
-            <?php endforeach; ?>
+            <span class="tag">CISSP</span>
+            <span class="tag">OSCP</span>
+            <span class="tag">ISO 27001 LA</span>
+            <span class="tag">GIAC GCIH</span>
+            <span class="tag">CEH</span>
+            <span class="tag">Security+</span>
+            <span class="tag">AWS Security</span>
+            <span class="tag">Azure AI</span>
         </div>
-        <?php endif; ?>
 
         <!-- Recherche -->
-        <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;"><?php echo $t['about_research']; ?></h2>
+        <h2 class="section-title" data-aos="fade-right" style="margin-top: 80px;"><?php echo $t['about_research']; ?>
+        </h2>
         <div class="card" style="margin-bottom: 30px;" data-aos="fade-up">
             <h3 class="text-accent"><?php echo $t['about_thesis']; ?></h3>
             <p><strong><?php echo $t['about_thesis_title']; ?></strong> <?php echo $t['about_thesis_year']; ?></p>
@@ -156,55 +143,63 @@ $conferences      = $pdo->query("SELECT * FROM conferences ORDER BY year DESC, s
             </div>
         </div>
 
-        <!-- Enseignements -->
-        <?php if (!empty($teachings)): ?>
+        <!-- Enseignement -->
         <h2 class="section-title" data-aos="fade-right"><?php echo $t['about_teaching']; ?></h2>
         <div class="skills-container">
-            <?php foreach ($teachings as $i => $teaching):
-                $teachTitle = ($lang === 'en' && !empty($teaching['title_en'])) ? $teaching['title_en'] : $teaching['title'];
-                $teachLevel = ($lang === 'en' && !empty($teaching['level_en'])) ? $teaching['level_en'] : $teaching['level'];
-                $teachDesc  = ($lang === 'en' && !empty($teaching['description_en'])) ? $teaching['description_en'] : $teaching['description'];
-                $delay = (($i % 3) + 1) * 100;
-            ?>
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
-                <h4><?php echo htmlspecialchars($teachTitle); ?></h4>
-                <p class="timeline-location"><?php echo htmlspecialchars($teachLevel); ?></p>
-                <p><?php echo htmlspecialchars($teachDesc); ?></p>
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+                <h4><?php echo $t['teach_1_title']; ?></h4>
+                <p class="timeline-location"><?php echo $t['teach_1_level']; ?></p>
+                <p><?php echo $t['teach_1_desc']; ?></p>
             </div>
-            <?php endforeach; ?>
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+                <h4><?php echo $t['teach_2_title']; ?></h4>
+                <p class="timeline-location"><?php echo $t['teach_2_level']; ?></p>
+                <p><?php echo $t['teach_2_desc']; ?></p>
+            </div>
+            <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
+                <h4><?php echo $t['teach_3_title']; ?></h4>
+                <p class="timeline-location"><?php echo $t['teach_3_level']; ?></p>
+                <p><?php echo $t['teach_3_desc']; ?></p>
+            </div>
         </div>
-        <?php endif; ?>
 
         <!-- Conférences -->
-        <?php if (!empty($conferences)): ?>
         <h2 class="section-title" data-aos="fade-right"><?php echo $t['about_conferences']; ?></h2>
         <div class="timeline">
-            <?php foreach ($conferences as $i => $conf):
-                $confTitle    = ($lang === 'en' && !empty($conf['title_en']))    ? $conf['title_en']    : $conf['title'];
-                $confLocation = ($lang === 'en' && !empty($conf['location_en'])) ? $conf['location_en'] : $conf['location'];
-                $confDesc     = ($lang === 'en' && !empty($conf['description_en'])) ? $conf['description_en'] : $conf['description'];
-                $delay = ($i + 1) * 100;
-            ?>
-            <div class="timeline-item" data-aos="fade-left" data-aos-delay="<?php echo $delay; ?>">
-                <div class="timeline-date"><?php echo $conf['year']; ?></div>
+            <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
+                <div class="timeline-date">2023</div>
                 <div class="timeline-content">
-                    <h5><?php echo htmlspecialchars($confTitle); ?></h5>
-                    <div class="timeline-location">
-                        <i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($confLocation); ?>
-                    </div>
-                    <p><?php echo htmlspecialchars($confDesc); ?></p>
+                    <h5><?php echo $t['conf_1_title']; ?></h5>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i>
+                        <?php echo $t['conf_1_location']; ?></div>
+                    <p><?php echo $t['conf_1_desc']; ?></p>
                 </div>
             </div>
-            <?php endforeach; ?>
+            <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                <div class="timeline-date">2022</div>
+                <div class="timeline-content">
+                    <h5><?php echo $t['conf_2_title']; ?></h5>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i>
+                        <?php echo $t['conf_2_location']; ?></div>
+                    <p><?php echo $t['conf_2_desc']; ?></p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
+                <div class="timeline-date">2021</div>
+                <div class="timeline-content">
+                    <h5><?php echo $t['conf_3_title']; ?></h5>
+                    <div class="timeline-location"><i class="fas fa-map-marker-alt"></i>
+                        <?php echo $t['conf_3_location']; ?></div>
+                    <p><?php echo $t['conf_3_desc']; ?></p>
+                </div>
+            </div>
         </div>
-        <?php endif; ?>
 
         <!-- Témoignage -->
         <div class="testimonial" data-aos="zoom-in">
             <p><?php echo $t['about_testimonial']; ?></p>
             <p class="testimonial-author"><?php echo $t['about_testimonial_author']; ?></p>
         </div>
-
     </div>
 </section>
 
